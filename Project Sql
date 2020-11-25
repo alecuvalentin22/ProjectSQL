@@ -1,0 +1,82 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <string>
+#include "Structure.h"
+
+class ParserException : public exception {
+
+};
+// | means OR
+// [] parameter not mandatory
+
+
+//enum CommandType { CREATETABLE, DROPTABLE, DISPLAYTABLE, CREATEINDEX, DROPINDEX, INSERT, DELETE, SELECT, UPDATE };
+
+class Command {
+	char* name = nullptr;
+	CommandType commandType;
+	
+
+	friend void operator >>(istream& input, Command& command);
+};
+
+
+class Create {
+	Table table name(column_1_name, type, default_value),(column_2_name, type, default_value);// at least one column 
+	Index; // [if not exists] index_name ON table_name (column_name) - creates an index only on a single column
+};
+
+class Drop {
+	Table table_name;
+	Index index_name;  
+};
+
+class Display {
+	Table table_name;
+};
+
+//INSERT INTO table VALUES(...); values are separated by , and they have the exact number and order as the table definition
+class Insert {
+
+};
+
+//SELECT(at_least_one_column, ...) | ALL FROM table_name[WHERE column_name = value] - the where clause is optional
+class Select {
+
+};
+
+//UPDATE table_name SET column_name = value WHERE  column_name = value (the SET column may be different than the WHERE one)
+class Update {
+
+};
+
+//DELETE FROM table_name WHERE column_name = value (deletes allows only one column in the where clause)
+class Delete {
+
+};
+
+class Index {
+
+};
+
+class Table {
+
+};
+
+
+void operator >>(istream& input, Command& command)
+{
+	cout << endl << "ENTER YOUR COMMAND: ";
+	int i = 0;
+	while (command.name != nullptr)
+	{
+		input >> command.name[i];
+		i++;
+	}
+}
+
+int main()
+{
+	Command command1;
+	cin >> command1;
+}
